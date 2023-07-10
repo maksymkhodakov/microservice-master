@@ -1,4 +1,4 @@
-package com.example.productservice;
+package com.jovakinn.productservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
