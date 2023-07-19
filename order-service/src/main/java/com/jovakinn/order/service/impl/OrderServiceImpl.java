@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.util.retry.Retry;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +23,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     @Override
     @Transactional
@@ -43,11 +45,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private InventoryDTO[] getInventoryData(List<String> skuCodes) {
-        return webClient.get()
-                .uri("http://localhost:8082/api/inventory",
+        return webClientBuilder.build()
+                .get()
+                .uri("http://inventory-service/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
                 .bodyToMono(InventoryDTO[].class)
+                .retryWhen(Retry.fixedDelay(3, Duration.ofMillis(100)))
                 .block();
     }
 
