@@ -41,8 +41,6 @@ F
 inventory-service/mvnw,6/e/6e9e8eb467c0fae955c7a1c4ade383b6f76a1920
 J
 inventory-service/mvnw.cmd,3/0/30d3c86b8c24af8122d0750ab615f11d36c98e2f
-~
-Norder-service/src/main/java/com/jovakinn/order/controller/OrderController.java,a/0/a0c653bc64b5c6b92086196cb4bb81ac429daa3c
 {
 Korder-service/src/main/java/com/jovakinn/order/domain/dto/OrderItemDTO.java,c/9/c96923ea70d4308055427b0d884ebd7838355c24
 Å
@@ -79,8 +77,6 @@ ainventory-service/src/main/java/com/jovakinn/inventoryservice/repository/Invent
 dinventory-service/src/main/java/com/jovakinn/inventoryservice/service/impl/InventoryServiceImpl.java,3/c/3c63ef6824ba34bca6c2721da8920c09b53392f6
 á
 Worder-service/src/main/java/com/jovakinn/order/exceptions/OrderNotInStockException.java,6/6/661600198121e6dc83f606584c22acdd573e3f1e
-x
-Horder-service/src/main/java/com/jovakinn/order/service/OrderService.java,2/2/225accf3b9cbc226a6abf557a409d3da12e91613
 L
 discovery-service/.gitignore,0/b/0be7e288c9bdcd53666e01bfe770ceb076d022a7
 í
@@ -91,8 +87,6 @@ g
 7discovery-service/.mvn/wrapper/maven-wrapper.properties,b/7/b7cd28bd3ef9b465be01ad7016b947006689ebb3
 F
 discovery-service/mvnw,c/8/c874ad25248c52a18db741cc97fbbee8191ab181
-E
-order-service/pom.xml,d/3/d3bf53ecc442740843266a635cbfe9807b992566
 G
 product-service/pom.xml,f/c/fcf146007330bb14605a232d25428bbf6aa50b7b
 à

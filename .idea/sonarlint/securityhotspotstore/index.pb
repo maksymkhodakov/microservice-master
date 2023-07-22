@@ -29,8 +29,6 @@ G
 microservice-master.iml,8/0/805020fc5866fb46ba750c0b1848258de2b517c8
 I
 inventory-service/HELP.md,f/c/fc3919b205058d701ef38d73976578b9a69081dc
-~
-Norder-service/src/main/java/com/jovakinn/order/controller/OrderController.java,a/0/a0c653bc64b5c6b92086196cb4bb81ac429daa3c
 “
 cinventory-service/src/test/java/com/jovakinn/inventoryservice/InventoryServiceApplicationTests.java,5/6/56dd78ac9d5dac6c3008f1418f5cf3d835dcb574
 ‚
@@ -79,16 +77,12 @@ dinventory-service/src/main/java/com/jovakinn/inventoryservice/service/impl/Inve
 [inventory-service/src/main/java/com/jovakinn/inventoryservice/service/InventoryService.java,9/0/90995d18e5fa368790e91a8de980586bf19924d1
 {
 Korder-service/src/main/java/com/jovakinn/order/domain/dto/InventoryDTO.java,0/5/05c54e361dac0194c9e3c4cf29c0d8b0735452e0
-x
-Horder-service/src/main/java/com/jovakinn/order/service/OrderService.java,2/2/225accf3b9cbc226a6abf557a409d3da12e91613
 ’
 bdiscovery-service/src/test/java/com/example/discoveryservice/DiscoveryServiceApplicationTests.java,3/e/3ef0e53c28eaca6585f92205258545a134c6ca52
 L
 discovery-service/.gitignore,0/b/0be7e288c9bdcd53666e01bfe770ceb076d022a7
 Ž
 ^inventory-service/src/main/java/com/jovakinn/inventoryservice/InventoryServiceApplication.java,3/2/324ef1b8e582900207645fd8979768d4eb4c19a1
-E
-order-service/pom.xml,d/3/d3bf53ecc442740843266a635cbfe9807b992566
 F
 discovery-service/mvnw,c/8/c874ad25248c52a18db741cc97fbbee8191ab181
 ˆ

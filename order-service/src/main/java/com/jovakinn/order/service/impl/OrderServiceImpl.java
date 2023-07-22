@@ -9,6 +9,8 @@ import com.jovakinn.order.repository.OrderRepository;
 import com.jovakinn.order.service.OrderService;
 import com.jovakinn.order.domain.data.OrderRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -19,15 +21,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
 
+    @SneakyThrows
     @Override
-    @Transactional
-    public void placeOrder(OrderRequest orderRequest) throws OrderNotInStockException {
+    @Transactional(rollbackFor = OrderNotInStockException.class)
+    public String placeOrder(OrderRequest orderRequest) {
         final Order order = OrderMapper.mapToEntity(orderRequest);
         final List<String> skuCodes = mapToSkuCodes(order);
 
@@ -35,6 +39,8 @@ public class OrderServiceImpl implements OrderService {
         final Boolean allProductsInStock = checkAllInStock(result);
 
         handleSaving(order, allProductsInStock);
+
+        return "Order successfully placed";
     }
 
     private List<String> mapToSkuCodes(Order order) {
