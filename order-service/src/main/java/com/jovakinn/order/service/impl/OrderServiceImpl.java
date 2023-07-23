@@ -8,6 +8,8 @@ import com.jovakinn.order.exceptions.OrderNotInStockException;
 import com.jovakinn.order.repository.OrderRepository;
 import com.jovakinn.order.service.OrderService;
 import com.jovakinn.order.domain.data.OrderRequest;
+import io.micrometer.tracing.Span;
+import io.micrometer.tracing.Tracer;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,7 @@ import java.util.Objects;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
+    private final Tracer tracer;
 
     @SneakyThrows
     @Override
@@ -51,21 +54,31 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private InventoryDTO[] getInventoryData(List<String> skuCodes) {
-        return webClientBuilder.build()
-                .get()
-                .uri("http://inventory-service/api/inventory",
-                        uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
-                .retrieve()
-                .bodyToMono(InventoryDTO[].class)
-                .retryWhen(Retry.fixedDelay(3, Duration.ofMillis(100)))
-                .block();
+        final Span inventoryServiceLookup = tracer.nextSpan().name("InventoryServiceLookup");
+        try (Tracer.SpanInScope spanInScope = tracer.withSpan(inventoryServiceLookup.start())) {
+            return webClientBuilder.build()
+                    .get()
+                    .uri("http://inventory-service/api/inventory",
+                            uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
+                    .retrieve()
+                    .bodyToMono(InventoryDTO[].class)
+                    .retryWhen(Retry.fixedDelay(3, Duration.ofMillis(100)))
+                    .block();
+        } finally {
+            inventoryServiceLookup.end();
+        }
     }
 
     private void handleSaving(Order order, Boolean allProductsInStock) throws OrderNotInStockException {
-        if (Boolean.TRUE.equals(allProductsInStock)) {
-            orderRepository.saveAndFlush(order);
-        } else {
-            throw new OrderNotInStockException("Product is not in stock, please try again later");
+        final Span handlingSaving = tracer.nextSpan().name("handlingSaving");
+        try (Tracer.SpanInScope spanInScope = tracer.withSpan(handlingSaving.start())) {
+            if (Boolean.TRUE.equals(allProductsInStock)) {
+                orderRepository.saveAndFlush(order);
+            } else {
+                throw new OrderNotInStockException("Product is not in stock, please try again later");
+            }
+        } finally {
+            handlingSaving.end();
         }
     }
 

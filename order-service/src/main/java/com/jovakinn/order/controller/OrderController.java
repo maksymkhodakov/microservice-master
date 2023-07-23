@@ -24,12 +24,13 @@ public class OrderController {
     @CircuitBreaker(name = "inventory", fallbackMethod = "fallbackMethod")
     @TimeLimiter(name = "inventory")
     @Retry(name = "inventory")
-    public CompletableFuture<ResponseEntity<String>> placeOrder(@RequestBody OrderRequest orderRequest) throws OrderNotInStockException {
+    public CompletableFuture<ResponseEntity<String>> placeOrder(@RequestBody OrderRequest orderRequest) {
         return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(orderService.placeOrder(orderRequest)));
     }
 
-    public CompletableFuture<ResponseEntity<String>> fallbackMethod() {
-        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok("Something went wrong!"));
+    public CompletableFuture<ResponseEntity<String>> fallbackMethod(OrderRequest orderRequest, OrderNotInStockException exception) {
+        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok("Something went wrong with placing order request! \n" +
+                "Order Request: " + orderRequest.toString() + "\n Exception message: " + exception.getMessage()));
     }
 
 }
