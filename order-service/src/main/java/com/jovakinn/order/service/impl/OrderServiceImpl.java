@@ -3,6 +3,8 @@ package com.jovakinn.order.service.impl;
 import com.jovakinn.order.domain.dto.InventoryDTO;
 import com.jovakinn.order.domain.enitties.Order;
 import com.jovakinn.order.domain.enitties.OrderItem;
+import com.jovakinn.order.domain.kafka.events.OrderPlacedEvent;
+import com.jovakinn.order.domain.kafka.topics.Topics;
 import com.jovakinn.order.domain.mapper.OrderMapper;
 import com.jovakinn.order.exceptions.OrderNotInStockException;
 import com.jovakinn.order.repository.OrderRepository;
@@ -13,6 +15,7 @@ import io.micrometer.tracing.Tracer;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -30,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
     private final Tracer tracer;
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
     @SneakyThrows
     @Override
@@ -74,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
         try (Tracer.SpanInScope spanInScope = tracer.withSpan(handlingSaving.start())) {
             if (Boolean.TRUE.equals(allProductsInStock)) {
                 orderRepository.saveAndFlush(order);
+                kafkaTemplate.send(Topics.Constants.NOTIFICATION_TOPIC, new OrderPlacedEvent(order.getOrderNumber()));
             } else {
                 throw new OrderNotInStockException("Product is not in stock, please try again later");
             }

@@ -25,8 +25,6 @@ Yproduct-service/src/main/java/com/jovakinn/productservice/domain/data/ProductRe
 Uproduct-service/src/main/java/com/jovakinn/productservice/domain/data/SearchData.java,6/3/63db8ecf7b030f624ae61458466bab605f173df6
 E
 order-service/HELP.md,f/c/fc556bef6fc0741bfc27f6e7c9b78d2f140e3e10
-G
-microservice-master.iml,8/0/805020fc5866fb46ba750c0b1848258de2b517c8
 I
 inventory-service/HELP.md,f/c/fc3919b205058d701ef38d73976578b9a69081dc
 ì
@@ -35,8 +33,6 @@ cinventory-service/src/test/java/com/jovakinn/inventoryservice/InventoryServiceA
 Rorder-service/src/main/java/com/jovakinn/order/domain/enitties/AbstractEntity.java,b/6/b69254c78993385c81a261dacfadb849d55918f2
 Å
 Qorder-service/src/main/java/com/jovakinn/order/domain/mapper/OrderItemMapper.java,9/3/9390bff897c59c9f2500b369702333a619e90f73
-9
-	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 |
 Lorder-service/src/main/java/com/jovakinn/order/domain/data/OrderRequest.java,5/c/5c3dda9b744bf1fbd7f8d8252b62cb5863b66b7c
 {
@@ -115,5 +111,11 @@ x
 Horder-service/src/main/java/com/jovakinn/order/service/OrderService.java,2/2/225accf3b9cbc226a6abf557a409d3da12e91613
 D
 api-gateway/mvnw.cmd,4/e/4e78ccd1f7fc9cfe04c98f2b5dff3904ec2e9bd6
-F
-order-service/mvnw.cmd,0/2/0275856d2f703f59f31829addee37078b30fcaf9
+{
+Korder-service/src/main/java/com/jovakinn/order/OrderServiceApplication.java,d/0/d092c11e44822541c34766e8c0d7ce00378df00c
+~
+Norder-service/src/main/java/com/jovakinn/order/controller/OrderController.java,a/0/a0c653bc64b5c6b92086196cb4bb81ac429daa3c
+I
+discovery-service/pom.xml,7/e/7e2a93dc15928a8ab4dff670d6d413b0a1b7e7b7
+I
+inventory-service/pom.xml,e/3/e347da292c40d252c508703eddff460d1f378f1c
