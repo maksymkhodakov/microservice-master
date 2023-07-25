@@ -4,6 +4,7 @@ import com.jovakinn.order.domain.dto.InventoryDTO;
 import com.jovakinn.order.domain.enitties.Order;
 import com.jovakinn.order.domain.enitties.OrderItem;
 import com.jovakinn.order.domain.kafka.events.OrderPlacedEvent;
+import com.jovakinn.order.domain.kafka.service.SenderService;
 import com.jovakinn.order.domain.kafka.topics.Topics;
 import com.jovakinn.order.domain.mapper.OrderMapper;
 import com.jovakinn.order.exceptions.OrderNotInStockException;
@@ -33,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
     private final Tracer tracer;
-    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
+    private final SenderService<OrderPlacedEvent> senderService;
 
     @SneakyThrows
     @Override
@@ -78,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
         try (Tracer.SpanInScope spanInScope = tracer.withSpan(handlingSaving.start())) {
             if (Boolean.TRUE.equals(allProductsInStock)) {
                 orderRepository.saveAndFlush(order);
-                kafkaTemplate.send(Topics.Constants.NOTIFICATION_TOPIC, new OrderPlacedEvent(order.getOrderNumber()));
+                senderService.sendMessage(Topics.Constants.NOTIFICATION, new OrderPlacedEvent(order.getOrderNumber()));
             } else {
                 throw new OrderNotInStockException("Product is not in stock, please try again later");
             }
