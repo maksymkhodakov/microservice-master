@@ -149,3 +149,17 @@ I
 inventory-service/pom.xml,e/3/e347da292c40d252c508703eddff460d1f378f1c
 L
 notification-service/pom.xml,0/1/01f9e880c9ba9f01d23d7605950269a1f1661129
+G
+product-service/pom.xml,f/c/fcf146007330bb14605a232d25428bbf6aa50b7b
+4
+.env,3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+E
+order-service/pom.xml,d/3/d3bf53ecc442740843266a635cbfe9807b992566
+B
+docker-compose.yml,3/5/35b8c13cf2eb2a194eada000eb310d65aed53b2a
+x
+Horder-service/src/main/java/com/jovakinn/order/service/OrderService.java,2/2/225accf3b9cbc226a6abf557a409d3da12e91613
+{
+Korder-service/src/main/java/com/jovakinn/order/OrderServiceApplication.java,d/0/d092c11e44822541c34766e8c0d7ce00378df00c
+z
+Jorder-service/src/main/java/com/jovakinn/order/config/WebClientConfig.java,6/8/68c077b2bcb77e2931a6033739faa20f6dd22964

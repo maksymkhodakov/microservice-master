@@ -35,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
     private final WebClient.Builder webClientBuilder;
     private final Tracer tracer;
     private final SenderService<OrderPlacedEvent> senderService;
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaOrderPlacedTemplate;
 
     @SneakyThrows
     @Override
@@ -79,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
         try (Tracer.SpanInScope spanInScope = tracer.withSpan(handlingSaving.start())) {
             if (Boolean.TRUE.equals(allProductsInStock)) {
                 orderRepository.saveAndFlush(order);
-                senderService.sendMessage(Topics.Constants.NOTIFICATION, new OrderPlacedEvent(order.getOrderNumber()));
+                senderService.sendMessage(Topics.Constants.NOTIFICATION, new OrderPlacedEvent(order.getOrderNumber()), kafkaOrderPlacedTemplate);
             } else {
                 throw new OrderNotInStockException("Product is not in stock, please try again later");
             }

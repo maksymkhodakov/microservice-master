@@ -15,10 +15,9 @@ import java.util.concurrent.CompletableFuture;
 @Service
 @RequiredArgsConstructor
 public class SenderServiceImpl<T> implements SenderService<T> {
-    private final KafkaTemplate<String, T> kafkaTemplate;
 
     @Override
-    public void sendMessage(String topic, T message) {
+    public void sendMessage(String topic, T message, KafkaTemplate<String, T> kafkaTemplate) {
         final CompletableFuture<SendResult<String, T>> future = kafkaTemplate.send(topic, message).completable();
         future.whenComplete((result, ex) -> logResult(message, result, ex));
     }
