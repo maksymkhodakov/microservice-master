@@ -125,16 +125,10 @@ M
 gnotification-service/src/main/java/com/jovakinn/notificationservice/NotificationServiceApplication.java,f/2/f25c6c17b21fe2c167bc1d7ff136453c035024d9
 œ
 lnotification-service/src/test/java/com/jovakinn/notificationservice/NotificationServiceApplicationTests.java,e/b/eb8349a765bb68afe005c31a504e146435e28293
-–
-fnotification-service/src/main/java/com/jovakinn/notificationservice/kafka/events/OrderPlacedEvent.java,6/4/64463a6c3a84baa25dbf6df7217e3a3a55ae825a
-Œ
-\notification-service/src/main/java/com/jovakinn/notificationservice/kafka/topics/Topics.java,f/6/f6b85d83cb110b2ceb8366ef118586959de80a9d
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 G
 microservice-master.iml,8/0/805020fc5866fb46ba750c0b1848258de2b517c8
-œ
-lnotification-service/src/main/java/com/jovakinn/notificationservice/kafka/listners/NotificationListener.java,3/6/36c574c89f449884719015505d9f18b768c0d1af
 F
 api-gateway/Dockerfile,9/5/9548e2ce3bdfe112d8c757987e1beebc1ecab5ed
 L
