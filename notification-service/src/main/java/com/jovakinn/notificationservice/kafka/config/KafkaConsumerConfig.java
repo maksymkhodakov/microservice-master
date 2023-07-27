@@ -1,4 +1,4 @@
-package com.jovakinn.notificationservice.kafka;
+package com.jovakinn.notificationservice.kafka.config;
 
 import com.jovakinn.notificationservice.kafka.events.OrderPlacedEvent;
 import com.jovakinn.notificationservice.kafka.topics.Topics;
@@ -56,7 +56,7 @@ public class KafkaConsumerConfig {
     public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerObjectContainerFactory() {
         final ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerObjectFactory());
-        factory.setMessageConverter(multiTypeConverter());
+        factory.setRecordMessageConverter(multiTypeConverter());
         return factory;
     }
 

@@ -29,8 +29,6 @@ I
 inventory-service/HELP.md,f/c/fc3919b205058d701ef38d73976578b9a69081dc
 ì
 cinventory-service/src/test/java/com/jovakinn/inventoryservice/InventoryServiceApplicationTests.java,5/6/56dd78ac9d5dac6c3008f1418f5cf3d835dcb574
-Ç
-Rorder-service/src/main/java/com/jovakinn/order/domain/enitties/AbstractEntity.java,b/6/b69254c78993385c81a261dacfadb849d55918f2
 Å
 Qorder-service/src/main/java/com/jovakinn/order/domain/mapper/OrderItemMapper.java,9/3/9390bff897c59c9f2500b369702333a619e90f73
 |
@@ -51,10 +49,6 @@ g
 ^product-service/src/main/java/com/jovakinn/productservice/service/impl/ProductServiceImpl.java,9/4/941f7eb929d4fafb2b23aaf04958359589088da0
 }
 Morder-service/src/main/java/com/jovakinn/order/domain/mapper/OrderMapper.java,f/0/f0c104ff39116f03ca347eac9c0e76d5e9f198b8
-y
-Iorder-service/src/main/java/com/jovakinn/order/domain/enitties/Order.java,e/3/e3c78bc1d978ab5e694cf6cc0275b8a167186d40
-}
-Morder-service/src/main/java/com/jovakinn/order/domain/enitties/OrderItem.java,f/5/f58c3b8f2e94cb521adc7477542759cf730e6d7f
 å
 \inventory-service/src/main/java/com/jovakinn/inventoryservice/domain/entities/Inventory.java,3/9/398b1e0480d1e4190663172100ef7f4ac02a95f0
 á
@@ -129,8 +123,6 @@ I
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 G
 microservice-master.iml,8/0/805020fc5866fb46ba750c0b1848258de2b517c8
-L
-notification-service/pom.xml,0/1/01f9e880c9ba9f01d23d7605950269a1f1661129
 C
 api-gateway/pom.xml,2/b/2bfa2b108f2439e99e004f4085b58c22cf995f73
 L
@@ -163,3 +155,7 @@ Horder-service/src/main/java/com/jovakinn/order/service/OrderService.java,2/2/2
 Korder-service/src/main/java/com/jovakinn/order/OrderServiceApplication.java,d/0/d092c11e44822541c34766e8c0d7ce00378df00c
 z
 Jorder-service/src/main/java/com/jovakinn/order/config/WebClientConfig.java,6/8/68c077b2bcb77e2931a6033739faa20f6dd22964
+{
+Korder-service/src/main/java/com/jovakinn/order/config/KafkaTopicConfig.java,b/f/bf2a7053ee53afb3b9163e9e0378d5539146913c
+~
+Norder-service/src/main/java/com/jovakinn/order/domain/kafka/topics/Topics.java,c/6/c69793bff3563868c8e349d7c1fc64bdea46cb08
