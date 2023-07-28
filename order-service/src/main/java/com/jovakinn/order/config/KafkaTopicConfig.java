@@ -1,6 +1,6 @@
 package com.jovakinn.order.config;
 
-import com.jovakinn.order.domain.kafka.topics.Topics;
+import com.jovakinn.order.kafka.enums.Topic;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +26,6 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic notificationTopic() {
-        return new NewTopic(Topics.Constants.NOTIFICATION, 5, (short) 1);
+        return new NewTopic(Topic.NOTIFICATION.getTopicName().getValue(), 5, (short) 1);
     }
 }

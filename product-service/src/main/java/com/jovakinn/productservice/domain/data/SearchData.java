@@ -3,7 +3,6 @@ package com.jovakinn.productservice.domain.data;
 import lombok.*;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class SearchData {

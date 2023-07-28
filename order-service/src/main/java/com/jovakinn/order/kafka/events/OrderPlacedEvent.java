@@ -1,12 +1,14 @@
-package com.jovakinn.order.domain.kafka.events;
+package com.jovakinn.order.kafka.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderPlacedEvent {
+public class OrderPlacedEvent implements Serializable {
     private String orderNumber;
 }

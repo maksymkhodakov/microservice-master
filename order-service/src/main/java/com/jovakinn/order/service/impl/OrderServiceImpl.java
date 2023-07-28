@@ -3,9 +3,9 @@ package com.jovakinn.order.service.impl;
 import com.jovakinn.order.domain.dto.InventoryDTO;
 import com.jovakinn.order.domain.enitties.Order;
 import com.jovakinn.order.domain.enitties.OrderItem;
-import com.jovakinn.order.domain.kafka.events.OrderPlacedEvent;
-import com.jovakinn.order.domain.kafka.service.SenderService;
-import com.jovakinn.order.domain.kafka.topics.Topics;
+import com.jovakinn.order.kafka.enums.Topic;
+import com.jovakinn.order.kafka.events.OrderPlacedEvent;
+import com.jovakinn.order.kafka.service.SenderService;
 import com.jovakinn.order.domain.mapper.OrderMapper;
 import com.jovakinn.order.exceptions.OrderNotInStockException;
 import com.jovakinn.order.repository.OrderRepository;
@@ -13,10 +13,11 @@ import com.jovakinn.order.service.OrderService;
 import com.jovakinn.order.domain.data.OrderRequest;
 import io.micrometer.tracing.Span;
 import io.micrometer.tracing.Tracer;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -30,12 +31,12 @@ import java.util.Objects;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class OrderServiceImpl implements OrderService {
-    private final OrderRepository orderRepository;
-    private final WebClient.Builder webClientBuilder;
-    private final Tracer tracer;
-    private final SenderService<OrderPlacedEvent> senderService;
-    private final KafkaTemplate<String, OrderPlacedEvent> kafkaOrderPlacedTemplate;
+    OrderRepository orderRepository;
+    WebClient.Builder webClientBuilder;
+    Tracer tracer;
+    SenderService<String, OrderPlacedEvent> senderService;
 
     @SneakyThrows
     @Override
@@ -80,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
         try (Tracer.SpanInScope spanInScope = tracer.withSpan(handlingSaving.start())) {
             if (Boolean.TRUE.equals(allProductsInStock)) {
                 orderRepository.saveAndFlush(order);
-                senderService.sendMessage(Topics.Constants.NOTIFICATION, new OrderPlacedEvent(order.getOrderNumber()), kafkaOrderPlacedTemplate);
+                senderService.sendMessage(Topic.NOTIFICATION.getTopicName().getValue(), null, null, Topic.NOTIFICATION.getTopicKeys().get(0).getTopicKey(), new OrderPlacedEvent(order.getOrderNumber()));
             } else {
                 throw new OrderNotInStockException("Product is not in stock, please try again later");
             }

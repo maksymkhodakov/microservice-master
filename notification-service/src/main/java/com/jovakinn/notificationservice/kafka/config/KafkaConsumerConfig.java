@@ -1,7 +1,7 @@
 package com.jovakinn.notificationservice.kafka.config;
 
+import com.jovakinn.notificationservice.kafka.enums.Topic;
 import com.jovakinn.notificationservice.kafka.events.OrderPlacedEvent;
-import com.jovakinn.notificationservice.kafka.topics.Topics;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +29,7 @@ public class KafkaConsumerConfig {
     public ConsumerFactory<String, String> consumerFactory() {
         final Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, Topics.Constants.NOTIFICATION_TOPIC);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, Topic.Constants.NOTIFICATION_GROUP_ID);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(props);
@@ -46,7 +46,7 @@ public class KafkaConsumerConfig {
     public ConsumerFactory<String, Object> consumerObjectFactory() {
         final Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, Topics.Constants.NOTIFICATION_TOPIC);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, Topic.Constants.NOTIFICATION_GROUP_ID);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(props);
