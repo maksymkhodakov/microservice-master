@@ -1,6 +1,5 @@
 package com.jovakinn.notificationservice.kafka.listners;
 
-import com.jovakinn.notificationservice.kafka.enums.Topic;
 import com.jovakinn.notificationservice.kafka.events.OrderPlacedEvent;
 import com.jovakinn.notificationservice.orderhistory.domain.entities.OrderHistory;
 import com.jovakinn.notificationservice.orderhistory.serivce.OrderHistoryService;
@@ -18,8 +17,8 @@ public class NotificationListener {
     private final OrderHistoryService orderHistoryService;
 
     @KafkaListener(
-            topics = Topic.Constants.NOTIFICATION_TOPIC_NAME,
-            groupId = Topic.Constants.NOTIFICATION_GROUP_ID,
+            topics = "#{T(com.jovakinn.notificationservice.kafka.enums.Topic).NOTIFICATION.getTopicName()}",
+            groupId = "#{T(com.jovakinn.notificationservice.kafka.enums.Topic).NOTIFICATION.getTopicGroupIds().get(0).getGroupId()",
             containerFactory = "kafkaListenerObjectContainerFactory"
     )
     public void handleNotification(@Payload OrderPlacedEvent orderPlacedEvent) {
