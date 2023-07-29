@@ -14,13 +14,15 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class NotificationListener {
 
+    private static final String TOPIC_NAME = "#{T(com.jovakinn.notificationservice.kafka.enums.Topic).NOTIFICATION.getTopicName()}";
+
+    private static final String GROUP_ID = "#{T(com.jovakinn.notificationservice.kafka.enums.Topic).NOTIFICATION.getTopicGroupIds().get(0).getGroupId()";
+
+    private static final String CONTAINER_FACTORY = "kafkaListenerObjectContainerFactory";
+
     private final OrderHistoryService orderHistoryService;
 
-    @KafkaListener(
-            topics = "#{T(com.jovakinn.notificationservice.kafka.enums.Topic).NOTIFICATION.getTopicName()}",
-            groupId = "#{T(com.jovakinn.notificationservice.kafka.enums.Topic).NOTIFICATION.getTopicGroupIds().get(0).getGroupId()",
-            containerFactory = "kafkaListenerObjectContainerFactory"
-    )
+    @KafkaListener(topics = TOPIC_NAME, groupId = GROUP_ID, containerFactory = CONTAINER_FACTORY)
     public void handleNotification(@Payload OrderPlacedEvent orderPlacedEvent) {
         log.info("Received notification for Order - {}", orderPlacedEvent.getOrderNumber());
         orderHistoryService.saveOrder(new OrderHistory(orderPlacedEvent));

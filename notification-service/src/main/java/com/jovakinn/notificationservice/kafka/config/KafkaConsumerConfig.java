@@ -29,7 +29,7 @@ public class KafkaConsumerConfig {
     public ConsumerFactory<String, String> consumerFactory() {
         final Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, Topic.Constants.NOTIFICATION_GROUP_ID);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, Topic.NOTIFICATION.getTopicGroupIds().get(0).getGroupId());
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(props);
@@ -46,7 +46,7 @@ public class KafkaConsumerConfig {
     public ConsumerFactory<String, Object> consumerObjectFactory() {
         final Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, Topic.Constants.NOTIFICATION_GROUP_ID);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, Topic.NOTIFICATION.getTopicGroupIds().get(0).getGroupId());
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(props);
