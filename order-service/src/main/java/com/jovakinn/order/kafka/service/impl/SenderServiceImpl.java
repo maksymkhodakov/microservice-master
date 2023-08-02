@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.header.Header;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -20,10 +21,13 @@ import java.util.concurrent.CompletableFuture;
 public class SenderServiceImpl<K, V> implements SenderService<K, V> {
 
     KafkaTemplate<K, V> kafkaTemplate;
+    RetryTemplate retryTemplate;
 
     @Override
     public void sendMessage(String topic, Integer partition, Long timestamp, K key, V value) {
-        final CompletableFuture<SendResult<K, V>> future = kafkaTemplate.send(topic, partition, timestamp, key, value).completable();
+        final CompletableFuture<SendResult<K, V>> future = retryTemplate.execute(
+                ctx -> kafkaTemplate.send(topic, partition, timestamp, key, value).completable()
+        );
         future.whenComplete((result, ex) -> logResult(value, result, ex));
     }
 
