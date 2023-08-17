@@ -33,4 +33,10 @@ public class OrderController {
                 "Order Request: " + orderRequest.toString() + "\n Exception message: " + exception.getMessage()));
     }
 
+    @PostMapping("/create")
+    @ResponseStatus
+    public void createOrder(@RequestBody OrderRequest orderRequest) {
+        orderService.createOrder(orderRequest);
+    }
+
 }

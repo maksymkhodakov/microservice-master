@@ -41,8 +41,6 @@ Korder-service/src/main/java/com/jovakinn/order/domain/dto/OrderItemDTO.java,c/
 Qorder-service/src/main/java/com/jovakinn/order/domain/mapper/OrderItemMapper.java,9/3/9390bff897c59c9f2500b369702333a619e90f73
 ~
 Norder-service/src/main/java/com/jovakinn/order/repository/OrderRepository.java,a/4/a4e770b3bc46faac26af3b27c98813e7133c7c2d
-|
-Lorder-service/src/main/java/com/jovakinn/order/domain/data/OrderRequest.java,5/c/5c3dda9b744bf1fbd7f8d8252b62cb5863b66b7c
 é
 ^product-service/src/main/java/com/jovakinn/productservice/service/impl/ProductServiceImpl.java,9/4/941f7eb929d4fafb2b23aaf04958359589088da0
 }
@@ -99,8 +97,6 @@ Kapi-gateway/src/main/java/com/example/apigateway/config/SecurityConfig.java,6/
 Wdiscovery-service/src/main/java/com/example/discoveryservice/config/SecurityConfig.java,3/4/34ae8105571827b1fd45b319499d8d17b688c7d1
 D
 api-gateway/mvnw.cmd,4/e/4e78ccd1f7fc9cfe04c98f2b5dff3904ec2e9bd6
-~
-Norder-service/src/main/java/com/jovakinn/order/controller/OrderController.java,a/0/a0c653bc64b5c6b92086196cb4bb81ac429daa3c
 L
 notification-service/HELP.md,3/8/38786e46e9363d4ae977afb28f21e06ce18270ef
 F
@@ -117,8 +113,6 @@ M
 lnotification-service/src/test/java/com/jovakinn/notificationservice/NotificationServiceApplicationTests.java,e/b/eb8349a765bb68afe005c31a504e146435e28293
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-G
-microservice-master.iml,8/0/805020fc5866fb46ba750c0b1848258de2b517c8
 F
 api-gateway/Dockerfile,9/5/9548e2ce3bdfe112d8c757987e1beebc1ecab5ed
 L
@@ -147,12 +141,6 @@ B
 docker-compose.yml,3/5/35b8c13cf2eb2a194eada000eb310d65aed53b2a
 {
 Korder-service/src/main/java/com/jovakinn/order/OrderServiceApplication.java,d/0/d092c11e44822541c34766e8c0d7ce00378df00c
-~
-Norder-service/src/main/java/com/jovakinn/order/config/KafkaProducerConfig.java,1/0/1075e0e93076fbc3b5d613e1c057283eefe6bdfb
-Ç
-Rorder-service/src/main/java/com/jovakinn/order/domain/enitties/AbstractEntity.java,b/6/b69254c78993385c81a261dacfadb849d55918f2
-y
-Iorder-service/src/main/java/com/jovakinn/order/domain/enitties/Order.java,e/3/e3c78bc1d978ab5e694cf6cc0275b8a167186d40
 }
 Morder-service/src/main/java/com/jovakinn/order/domain/enitties/OrderItem.java,f/5/f58c3b8f2e94cb521adc7477542759cf730e6d7f
 †
@@ -169,23 +157,25 @@ unotification-service/src/main/java/com/jovakinn/notificationservice/orderhistor
 wnotification-service/src/main/java/com/jovakinn/notificationservice/orderhistory/repository/OrderHistoryRepository.java,a/d/add7b52087143cf8b99025fdf3a9c9cc4d0df57d
 °
 qnotification-service/src/main/java/com/jovakinn/notificationservice/orderhistory/serivce/OrderHistoryService.java,1/8/18e6ee1f53046f48694e4bcdd7a29bd8ff25d444
-x
-Horder-service/src/main/java/com/jovakinn/order/service/OrderService.java,2/2/225accf3b9cbc226a6abf557a409d3da12e91613
 ñ
 fnotification-service/src/main/java/com/jovakinn/notificationservice/kafka/events/OrderPlacedEvent.java,6/4/64463a6c3a84baa25dbf6df7217e3a3a55ae825a
-Å
-Qorder-service/src/main/java/com/jovakinn/order/kafka/events/OrderPlacedEvent.java,7/8/78f1e6c43256c2d7a076d878a950f5785e173c74
 Ö
 Uproduct-service/src/main/java/com/jovakinn/productservice/domain/data/SearchData.java,6/3/63db8ecf7b030f624ae61458466bab605f173df6
 y
 Iorder-service/src/main/java/com/jovakinn/order/kafka/enums/TopicKeys.java,9/6/96c609a3a1ff35256e8b471a56c2c02d0e8ff015
 é
 ^notification-service/src/main/java/com/jovakinn/notificationservice/kafka/enums/TopicName.java,b/9/b9a811434c2c27f3c019f92d88f9a427cadb2245
-Å
-Qorder-service/src/main/java/com/jovakinn/order/service/impl/OrderServiceImpl.java,9/f/9f78a9d1fe3e9c2aa666e6c56b27d9312fccdd5e
 ó
 gnotification-service/src/main/java/com/jovakinn/notificationservice/NotificationServiceApplication.java,f/2/f25c6c17b21fe2c167bc1d7ff136453c035024d9
 L
 notification-service/pom.xml,0/1/01f9e880c9ba9f01d23d7605950269a1f1661129
 ë
 anotification-service/src/main/java/com/jovakinn/notificationservice/kafka/enums/TopicGroupId.java,2/d/2ddc8f0f3c6c5e0b1265bdac8de8aa815e127c5f
+ú
+lnotification-service/src/main/java/com/jovakinn/notificationservice/kafka/listners/NotificationListener.java,3/6/36c574c89f449884719015505d9f18b768c0d1af
+ô
+inotification-service/src/main/java/com/jovakinn/notificationservice/kafka/config/KafkaConsumerConfig.java,5/a/5a184d7321e9a07d462b452d4a7b8c5a33d5be0e
+z
+Jorder-service/src/main/java/com/jovakinn/order/config/WebClientConfig.java,6/8/68c077b2bcb77e2931a6033739faa20f6dd22964
+ä
+Znotification-service/src/main/java/com/jovakinn/notificationservice/kafka/enums/Topic.java,e/f/ef8972dfcf30655a454cf048ef14ccf8986860fc

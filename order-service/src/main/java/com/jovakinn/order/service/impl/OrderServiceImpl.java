@@ -3,6 +3,8 @@ package com.jovakinn.order.service.impl;
 import com.jovakinn.order.domain.dto.InventoryDTO;
 import com.jovakinn.order.domain.enitties.Order;
 import com.jovakinn.order.domain.enitties.OrderItem;
+import com.jovakinn.order.domain.enums.OrderStatus;
+import com.jovakinn.order.domain.events.OrderEvent;
 import com.jovakinn.order.kafka.enums.Topic;
 import com.jovakinn.order.kafka.events.OrderPlacedEvent;
 import com.jovakinn.order.kafka.service.SenderService;
@@ -36,7 +38,8 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
     WebClient.Builder webClientBuilder;
     Tracer tracer;
-    SenderService<String, OrderPlacedEvent> senderService;
+    SenderService<String, OrderPlacedEvent> senderServicePlacedOrder;
+    SenderService<String, OrderEvent> senderServiceOrderEvent;
 
     @SneakyThrows
     @Override
@@ -51,6 +54,13 @@ public class OrderServiceImpl implements OrderService {
         handleSaving(order, allProductsInStock);
 
         return "Order successfully placed";
+    }
+
+    @Override
+    public void createOrder(OrderRequest orderRequest) {
+        final Order order = OrderMapper.mapToEntity(orderRequest);
+        final OrderEvent orderEvent = new OrderEvent(order, OrderStatus.CREATED);
+        senderServiceOrderEvent.sendMessage(Topic.NOTIFICATION.getTopicName().getValue(), null, null, null, orderEvent);
     }
 
     private List<String> mapToSkuCodes(Order order) {
@@ -81,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
         try (Tracer.SpanInScope spanInScope = tracer.withSpan(handlingSaving.start())) {
             if (Boolean.TRUE.equals(allProductsInStock)) {
                 orderRepository.saveAndFlush(order);
-                senderService.sendMessage(Topic.NOTIFICATION.getTopicName().getValue(), null, null, Topic.NOTIFICATION.getTopicKeys().get(0).getTopicKey(), new OrderPlacedEvent(order.getOrderNumber()));
+                senderServicePlacedOrder.sendMessage(Topic.NOTIFICATION.getTopicName().getValue(), null, null, Topic.NOTIFICATION.getTopicKeys().get(0).getTopicKey(), new OrderPlacedEvent(order.getOrderNumber()));
             } else {
                 throw new OrderNotInStockException("Product is not in stock, please try again later");
             }
